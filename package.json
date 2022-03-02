@@ -1,0 +1,14 @@
+{
+  "name": "aws-hosted",
+  "version": "1.0.0",
+  "description": "Checks if a service is hosted on AWS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Lubic",
+  "license": "ISC",
+  "dependencies": {
+    "ip-range-check": "^0.2.0"
+  }
+}
