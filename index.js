@@ -6,12 +6,21 @@ const ipRangeCheck = require("ip-range-check")
 // get public IP for service being tested
 // cross reference aws CIDRs and public IP
 
-const getPublicIp = (url) => {
+const sendRequest = (url) => {
   return new Promise((resolve) => {
     http.get(`http://${url}`, (res) => {
-      resolve(res.socket.remoteAddress)
+      resolve(res)
     })
   })
+}
+
+const printHeaders = (res) => {
+  console.log(res.headers)
+  return Promise.resolve(res)
+}
+
+const getPublicIp = (res) => {
+  return Promise.resolve(res.socket.remoteAddress)
 }
 
 const checkAwsRanges = (ip) => {
@@ -52,6 +61,8 @@ const printResults = (matches) => {
 
 const url = process.argv.slice(2, 3)
 
-getPublicIp(url)
+sendRequest(url)
+  .then(printHeaders)
+  .then(getPublicIp)
   .then(checkAwsRanges)
   .then(printResults)
